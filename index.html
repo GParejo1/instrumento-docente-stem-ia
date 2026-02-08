@@ -4,26 +4,24 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Instrumento Docente STEM + IA (Likert + Test)</title>
+
   <style>
     :root{
       --bg1:#667eea; --bg2:#764ba2;
       --card:#ffffff; --muted:#6b7280; --text:#111827;
       --green:#10b981; --green2:#059669;
       --border:#e5e7eb; --soft:#f3f4f6;
-      --warn:#f59e0b; --danger:#ef4444;
+      --danger:#ef4444;
     }
     *{box-sizing:border-box;margin:0;padding:0}
     body{
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%);
-      min-height:100vh; padding:20px;
-      color:var(--text);
+      min-height:100vh; padding:20px; color:var(--text);
     }
     .container{
-      max-width:980px; margin:0 auto;
-      background:var(--card);
-      border-radius:18px;
-      box-shadow:0 20px 45px rgba(0,0,0,.15);
+      max-width:980px; margin:0 auto; background:var(--card);
+      border-radius:18px; box-shadow:0 20px 45px rgba(0,0,0,.15);
       overflow:hidden;
     }
     .header{
@@ -33,12 +31,10 @@
     .header h1{font-weight:700; font-size:1.8rem; margin-bottom:8px}
     .header p{opacity:.95; line-height:1.4}
     .content{padding:26px}
+
     .card{
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius:14px;
-      padding:18px;
-      margin-bottom:16px;
+      background:#fff; border:1px solid var(--border);
+      border-radius:14px; padding:18px; margin-bottom:16px;
     }
     .card.soft{background:var(--soft)}
     .title-row{
@@ -55,19 +51,19 @@
     .small{font-size:.88rem}
     .grid2{display:grid; grid-template-columns:1fr 1fr; gap:12px}
     @media (max-width:760px){ .grid2{grid-template-columns:1fr} }
+
     label{display:block; font-weight:700; margin:10px 0 6px}
     input, select{
       width:100%; padding:12px 12px; border-radius:10px;
-      border: 2px solid var(--border);
-      font-size:1rem;
-      outline:none;
+      border:2px solid var(--border); font-size:1rem; outline:none;
     }
     input:focus, select:focus{border-color: rgba(16,185,129,.85)}
     .note{
       margin-top:8px; padding:10px 12px; border-radius:12px;
-      background: rgba(245,158,11,.10); border: 1px solid rgba(245,158,11,.25);
+      background: rgba(245,158,11,.10); border:1px solid rgba(245,158,11,.25);
       color:#92400e;
     }
+
     .progress{
       height:10px; background:rgba(229,231,235,.9);
       border-radius:999px; overflow:hidden; margin:14px 0 18px;
@@ -77,79 +73,76 @@
       background: linear-gradient(90deg, var(--green), var(--green2));
       transition:width .25s ease;
     }
+
     .btn-row{display:flex; gap:10px; justify-content:space-between; flex-wrap:wrap; margin-top:14px}
     .btn{
       border:none; cursor:pointer;
       padding:12px 18px; border-radius:999px;
       font-weight:800; font-size:1rem;
       background: linear-gradient(135deg, var(--green), var(--green2));
-      color:#fff;
-      box-shadow: 0 10px 22px rgba(16,185,129,.25);
+      color:#fff; box-shadow: 0 10px 22px rgba(16,185,129,.25);
       transition: transform .12s ease;
     }
     .btn:hover{transform: translateY(-1px)}
-    .btn.secondary{
-      background:#6b7280; box-shadow:0 10px 22px rgba(107,114,128,.25);
-    }
-    .btn.danger{background:var(--danger); box-shadow:0 10px 22px rgba(239,68,68,.25)}
+    .btn.secondary{background:#6b7280; box-shadow:0 10px 22px rgba(107,114,128,.25)}
     .btn:disabled{opacity:.55; cursor:not-allowed; transform:none}
+
     .screen{display:none}
     .screen.active{display:block}
-    .dim-title{
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
-      margin-bottom:10px;
+
+    /* ====== DIMENSION HEADER (PASTEL) ====== */
+    .dim-head{
+      display:flex; gap:14px; align-items:flex-start;
+      padding:14px; border-radius:16px; margin-bottom:12px;
+      background:#f9fafb; border:1px solid #e5e7eb;
     }
-    .dim-title h3{font-size:1.12rem}
-    .likert-scale{
-      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
-      margin:10px 0 0;
-      color:var(--muted);
+    .dim-accent{
+      width:12px; border-radius:999px; flex:0 0 12px;
+      box-shadow: 0 6px 14px rgba(0,0,0,.06);
     }
+    .dim-left{display:flex; flex-direction:column; gap:6px}
+    .dim-left h3{margin:0; font-size:1.05rem; font-weight:800}
+    .dim-desc{font-size:.9rem; color:#6b7280; line-height:1.45}
+
     .item{
       border:1px solid var(--border);
-      border-radius:14px;
-      padding:14px;
-      margin:10px 0;
+      border-radius:14px; padding:14px; margin:10px 0;
       background:#fff;
     }
     .item .q{font-weight:700; margin-bottom:10px; line-height:1.4}
+
     .likert{
       display:grid;
       grid-template-columns: repeat(5, minmax(44px, 1fr));
-      gap:8px;
-      align-items:center;
+      gap:8px; align-items:center;
     }
     .likert label{
-      margin:0; font-weight:700; font-size:.9rem; text-align:center;
+      margin:0; font-weight:800; font-size:.9rem; text-align:center;
       border:2px solid var(--border);
       border-radius:12px;
-      padding:10px 0;
       cursor:pointer;
       user-select:none;
       background:#fff;
       transition:.12s ease;
+      padding:0;
     }
     .likert input{display:none}
-    .likert input:checked + span{
-      display:block;
-      background: rgba(16,185,129,.12);
-      border:2px solid rgba(16,185,129,.55);
-      color: var(--green2);
-      border-radius:12px;
-      padding:10px 0;
-      font-weight:900;
-    }
     .likert label span{
       display:block;
-      border-radius:12px;
+      border-radius:10px;
       padding:10px 0;
       border:2px solid transparent;
     }
+    .likert input:checked + span{
+      background: rgba(16,185,129,.12);
+      border:2px solid rgba(16,185,129,.55);
+      color: var(--green2);
+      font-weight:900;
+    }
+
     .test-q{
       border:1px solid var(--border);
-      border-radius:14px;
-      padding:14px;
-      margin:12px 0;
+      border-radius:14px; padding:14px; margin:12px 0;
       background:#fff;
     }
     .test-q .q{font-weight:800; margin-bottom:10px; line-height:1.4}
@@ -157,11 +150,11 @@
       display:flex; gap:10px; align-items:flex-start;
       padding:10px 10px; border:1px solid var(--border);
       border-radius:12px; margin:8px 0;
-      cursor:pointer;
-      background:#fff;
+      cursor:pointer; background:#fff;
     }
     .opt:hover{border-color: rgba(16,185,129,.55); background: rgba(16,185,129,.06)}
     .opt input{width:auto; margin-top:3px}
+
     .center{text-align:center}
     .alert{
       margin-top:12px; padding:12px 14px; border-radius:12px;
@@ -183,7 +176,7 @@
   <div class="container">
     <div class="header">
       <h1>🧠 Instrumento Docente STEM + IA</h1>
-      <p>Diagnóstico breve (≤15 min): <b>Likert por dimensiones</b> + <b>Mini test</b>. Resultados para análisis académico.</p>
+      <p>Diagnóstico breve (≤15 min): <b>Likert por dimensiones</b> + <b>Mini test</b>. Uso académico.</p>
     </div>
 
     <div class="content">
@@ -199,7 +192,8 @@
           <p class="muted">
             Este instrumento busca caracterizar aspectos relacionados con la integración de STEM, pensamiento computacional e IA en la práctica docente.
             <br><br>
-            <b>No hay respuestas “buenas” o “malas”</b> en la sección Likert. En el mini test se incluyen preguntas conceptuales breves.
+            <b>Sección Likert:</b> no hay respuestas correctas o incorrectas.<br>
+            <b>Mini test:</b> preguntas conceptuales breves para caracterización.
           </p>
         </div>
 
@@ -309,7 +303,7 @@
         <div class="card soft">
           <div class="title-row">
             <span class="badge">Mini test</span>
-            <span class="muted small">10 preguntas (selección múltiple)</span>
+            <span class="muted small">10 preguntas</span>
           </div>
           <p class="muted small">Responde según tu conocimiento. Esta sección es breve y busca caracterización conceptual.</p>
         </div>
@@ -344,17 +338,21 @@
 
   <script>
     // ====== CONFIG ======
+    // Pega aquí tu URL FINAL /exec (la que ya te funciona)
     const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwrE575fVvk-bMYIuqtK5Gm9Yw0TMVo2bFLx_t-jTIVcFTgujXICFTABDUFXPVlLsZX0A/exec";
 
     // ====== STATE ======
     const screens = ["screenStart","screenTeacher","screenLikert","screenTest","screenThanks"];
     const progressFill = document.getElementById("progressFill");
 
-    // ====== LIKERT MODEL (5 dimensiones x 4 ítems) ======
+    // ====== LIKERT MODEL (PASTEL + DESC) ======
     const likertDimensions = [
       {
         id:"D1",
         name:"D1. Conocimiento STEM y fundamentos conceptuales",
+        desc:"Explora bases conceptuales, razonamiento con evidencia y relación ciencia–tecnología en la enseñanza.",
+        color:"#c7d2fe",
+        bg:"#eef2ff",
         items:[
           "Tengo claridad conceptual para explicar fenómenos o conceptos de mi área con enfoque STEM.",
           "Relaciono conceptos científicos con situaciones reales o aplicaciones tecnológicas.",
@@ -365,6 +363,9 @@
       {
         id:"D2",
         name:"D2. Integración pedagógica de tecnologías e IA",
+        desc:"Indaga el uso pedagógico de tecnologías e IA, aprendizaje activo y enfoque crítico-responsable.",
+        color:"#bbf7d0",
+        bg:"#ecfdf5",
         items:[
           "Integro herramientas digitales con un propósito pedagógico claro (no solo por uso de tecnología).",
           "Diseño actividades donde el estudiante crea o construye (por ejemplo, proyectos o retos).",
@@ -375,6 +376,9 @@
       {
         id:"D3",
         name:"D3. Pensamiento computacional y resolución de problemas",
+        desc:"Valora prácticas para descomponer, abstraer, diseñar pasos y depurar soluciones.",
+        color:"#e9d5ff",
+        bg:"#faf5ff",
         items:[
           "Guío a mis estudiantes para descomponer problemas en partes más manejables.",
           "Fomento que los estudiantes diseñen pasos o algoritmos para resolver situaciones.",
@@ -385,6 +389,9 @@
       {
         id:"D4",
         name:"D4. Diseño e implementación de experiencias STEM (contexto)",
+        desc:"Revisa pertinencia al entorno, interdisciplinariedad, iteración y colaboración en proyectos.",
+        color:"#fde68a",
+        bg:"#fffbeb",
         items:[
           "Planeo actividades STEM conectadas con el entorno o la realidad de los estudiantes.",
           "Formulo retos o problemas auténticos que integran más de un área (interdisciplinariedad).",
@@ -395,6 +402,9 @@
       {
         id:"D5",
         name:"D5. Evaluación, reflexión y mejora de la práctica docente",
+        desc:"Considera evaluación formativa, evidencias, retroalimentación y mejora continua.",
+        color:"#fecdd3",
+        bg:"#fff1f2",
         items:[
           "Utilizo rúbricas u otros criterios claros para evaluar procesos y productos de proyectos.",
           "Realizo retroalimentación formativa para mejorar aprendizajes (no solo calificar).",
@@ -404,84 +414,44 @@
       }
     ];
 
-    // ====== TEST MODEL (10 preguntas con respuesta correcta) ======
+    // ====== TEST MODEL (10 preguntas) ======
     const testQuestions = [
-      {
-        id:"T1",
-        q:"¿Cuál es el principio fundamental del pensamiento computacional?",
-        options:["Programación","Uso de computadoras","Algoritmos complejos","Descomposición de problemas"],
-        correct:3
-      },
-      {
-        id:"T2",
-        q:"¿Qué subhabilidad corresponde a identificar patrones o similitudes entre problemas?",
-        options:["Abstracción","Reconocimiento de patrones","Depuración","Simulación"],
-        correct:1
-      },
-      {
-        id:"T3",
-        q:"En una actividad con IA (p.ej., Teachable Machine), ¿qué es un “dato de entrenamiento”?",
-        options:["La nota final","Un ejemplo usado para enseñar al modelo","El algoritmo del docente","Un tipo de sensor"],
-        correct:1
-      },
-      {
-        id:"T4",
-        q:"¿Cuál es la primera etapa del proceso de diseño en ingeniería?",
-        options:["Identificar el problema","Construir el prototipo","Probar la solución","Elegir materiales"],
-        correct:0
-      },
-      {
-        id:"T5",
-        q:"¿Qué significa “depurar” en programación/pensamiento computacional?",
-        options:["Hacer el programa más largo","Encontrar y corregir errores","Cambiar el lenguaje","Ejecutar más rápido"],
-        correct:1
-      },
-      {
-        id:"T6",
-        q:"Al enseñar IA, ¿qué consideración ética es especialmente importante?",
-        options:["Velocidad de procesamiento","Costo computacional","Sesgo algorítmico y equidad","Cantidad de memoria"],
-        correct:2
-      },
-      {
-        id:"T7",
-        q:"¿Qué describe mejor la abstracción en pensamiento computacional?",
-        options:["Memorizar pasos","Ignorar lo relevante","Enfocarse en lo esencial y omitir detalles innecesarios","Usar solo computadores"],
-        correct:2
-      },
-      {
-        id:"T8",
-        q:"¿Qué característica define mejor una experiencia STEM interdisciplinaria exitosa?",
-        options:["Tecnología avanzada","Conexiones auténticas entre disciplinas","Muchos estudiantes","Proyecto muy largo"],
-        correct:1
-      },
-      {
-        id:"T9",
-        q:"¿Cuál es el propósito principal de usar microcontroladores (p. ej., Micro:Bit) en el aula?",
-        options:["Reemplazar libros","Hacer solo presentaciones","Conectar lo digital con lo físico en soluciones","Evitar el trabajo colaborativo"],
-        correct:2
-      },
-      {
-        id:"T10",
-        q:"¿Qué práctica favorece mejor el aprendizaje activo en STEM?",
-        options:["Memorizar definiciones","Proyectos basados en problemas del contexto","Solo clase magistral","Copiar ejercicios"],
-        correct:1
-      }
+      { id:"T1", q:"¿Cuál es el principio fundamental del pensamiento computacional?",
+        options:["Programación","Uso de computadoras","Algoritmos complejos","Descomposición de problemas"], correct:3 },
+      { id:"T2", q:"¿Qué subhabilidad corresponde a identificar patrones o similitudes entre problemas?",
+        options:["Abstracción","Reconocimiento de patrones","Depuración","Simulación"], correct:1 },
+      { id:"T3", q:"En una actividad con IA (p.ej., Teachable Machine), ¿qué es un “dato de entrenamiento”?",
+        options:["La nota final","Un ejemplo usado para enseñar al modelo","El algoritmo del docente","Un tipo de sensor"], correct:1 },
+      { id:"T4", q:"¿Cuál es la primera etapa del proceso de diseño en ingeniería?",
+        options:["Identificar el problema","Construir el prototipo","Probar la solución","Elegir materiales"], correct:0 },
+      { id:"T5", q:"¿Qué significa “depurar” en programación/pensamiento computacional?",
+        options:["Hacer el programa más largo","Encontrar y corregir errores","Cambiar el lenguaje","Ejecutar más rápido"], correct:1 },
+      { id:"T6", q:"Al enseñar IA, ¿qué consideración ética es especialmente importante?",
+        options:["Velocidad de procesamiento","Costo computacional","Sesgo algorítmico y equidad","Cantidad de memoria"], correct:2 },
+      { id:"T7", q:"¿Qué describe mejor la abstracción en pensamiento computacional?",
+        options:["Memorizar pasos","Ignorar lo relevante","Enfocarse en lo esencial y omitir detalles innecesarios","Usar solo computadores"], correct:2 },
+      { id:"T8", q:"¿Qué característica define mejor una experiencia STEM interdisciplinaria exitosa?",
+        options:["Tecnología avanzada","Conexiones auténticas entre disciplinas","Muchos estudiantes","Proyecto muy largo"], correct:1 },
+      { id:"T9", q:"¿Cuál es el propósito principal de usar microcontroladores (p. ej., Micro:Bit) en el aula?",
+        options:["Reemplazar libros","Hacer solo presentaciones","Conectar lo digital con lo físico en soluciones","Evitar el trabajo colaborativo"], correct:2 },
+      { id:"T10", q:"¿Qué práctica favorece mejor el aprendizaje activo en STEM?",
+        options:["Memorizar definiciones","Proyectos basados en problemas del contexto","Solo clase magistral","Copiar ejercicios"], correct:1 }
     ];
 
-    // ====== UI RENDER ======
+    // ====== NAV ======
     function goTo(id){
       screens.forEach(s => document.getElementById(s).classList.remove("active"));
       document.getElementById(id).classList.add("active");
       updateProgress(id);
       window.scrollTo({top:0, behavior:"smooth"});
     }
-
     function updateProgress(screenId){
       const idx = screens.indexOf(screenId);
       const pct = Math.max(0, Math.round((idx / (screens.length - 1)) * 100));
       progressFill.style.width = pct + "%";
     }
 
+    // ====== RENDER ======
     function renderLikert(){
       const container = document.getElementById("likertContainer");
       container.innerHTML = "";
@@ -489,9 +459,15 @@
       likertDimensions.forEach(dim => {
         const card = document.createElement("div");
         card.className = "card";
+        card.style.background = dim.bg;  // pastel suave por dimensión
+
         card.innerHTML = `
-          <div class="dim-title">
-            <h3>${dim.name}</h3>
+          <div class="dim-head" style="background:${dim.bg};">
+            <div class="dim-accent" style="background:${dim.color};"></div>
+            <div class="dim-left">
+              <h3>${dim.name}</h3>
+              <div class="dim-desc">${dim.desc}</div>
+            </div>
             <span class="badge">4 ítems</span>
           </div>
         `;
@@ -538,12 +514,11 @@
       });
     }
 
-    // init renders
     renderLikert();
     renderTest();
     updateProgress("screenStart");
 
-    // ====== VALIDATIONS ======
+    // ====== VALIDATE ======
     function validateTeacherAndGo(){
       const req = [
         ["nombres","Nombres"],
@@ -551,7 +526,6 @@
         ["grado","Grado"],
         ["asignatura","Asignatura"]
       ];
-
       for (const [id, label] of req){
         const el = document.getElementById(id);
         if (!el.value || !String(el.value).trim()){
@@ -565,7 +539,6 @@
 
     function validateLikertAndGo(){
       document.getElementById("likertAlert").style.display = "none";
-
       const totalItems = 20;
       let answered = 0;
 
@@ -597,6 +570,8 @@
     }
 
     // ====== COMPUTE ======
+    function round2(n){ return Math.round(n * 100) / 100; }
+
     function getTeacherInfo(){
       return {
         nombres: document.getElementById("nombres").value.trim(),
@@ -622,12 +597,10 @@
           vals.push(v);
           allVals.push(v);
         });
-        const avg = round2(vals.reduce((a,b)=>a+b,0) / vals.length);
-        dimAverages[dim.id] = avg;
+        dimAverages[dim.id] = round2(vals.reduce((a,b)=>a+b,0) / vals.length);
       });
 
       const global = round2(allVals.reduce((a,b)=>a+b,0) / allVals.length);
-
       return { itemAnswers, dimAverages, global };
     }
 
@@ -642,7 +615,6 @@
       });
 
       const pct = Math.round((correct / testQuestions.length) * 100);
-
       let level = "Inicial";
       if (pct >= 85) level = "Avanzado";
       else if (pct >= 70) level = "Intermedio";
@@ -651,8 +623,6 @@
       return { answers, correct, total: testQuestions.length, pct, level };
     }
 
-    function round2(n){ return Math.round(n * 100) / 100; }
-
     async function sha256(text){
       if (!text) return "";
       const enc = new TextEncoder().encode(text);
@@ -660,17 +630,16 @@
       return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,"0")).join("");
     }
 
-    // ====== SEND ======
-async function submitResults(payload){
-  const res = await fetch(APPS_SCRIPT_URL, {
-    method: "POST",
-    body: JSON.stringify(payload) // sin headers => text/plain => sin preflight
-  });
+    // ====== SEND (NO CORS PREFLIGHT) ======
+    async function submitResults(payload){
+      const res = await fetch(APPS_SCRIPT_URL, {
+        method: "POST",
+        body: JSON.stringify(payload) // sin headers => evita preflight
+      });
 
-  // Apps Script devuelve JSON; intentamos leerlo
-  const text = await res.text();
-  try { return JSON.parse(text); } catch { return { ok:false, raw:text }; }
-}
+      const text = await res.text();
+      try { return JSON.parse(text); } catch { return { ok:false, raw:text }; }
+    }
 
     async function finalizeAndSend(){
       document.getElementById("sendAlert").style.display = "none";
@@ -687,7 +656,6 @@ async function submitResults(payload){
         const test = computeTestScore();
         const id_hash = await sha256(docente.identificacion || "");
 
-        // Payload: guarda promedios + respuestas item a item (ideal tesis)
         const payload = {
           timestamp: new Date().toISOString(),
           nombres: docente.nombres,
@@ -709,18 +677,15 @@ async function submitResults(payload){
           test_score: test.pct,
           test_level: test.level,
 
-          // detalle Likert (20)
+          // detalle Likert (20 columnas)
           ...likert.itemAnswers,
 
-          // detalle Test (10)
+          // detalle Test (10 columnas)
           ...Object.fromEntries(Object.entries(test.answers).map(([k,v]) => [`${k}_ans`, v]))
         };
 
         const r = await submitResults(payload);
-
-        if (!r || r.ok !== true){
-          throw new Error("Respuesta no OK del servidor");
-        }
+        if (!r || r.ok !== true) throw new Error("Respuesta no OK");
 
         document.getElementById("sendOk").style.display = "block";
         setTimeout(() => goTo("screenThanks"), 650);
